@@ -7,7 +7,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 from flask import abort, Blueprint
-from flask.ext.bootstrap import Bootstrap
+from flask_bootstrap  import Bootstrap
 
 from config import config
 from form_exec import *
@@ -26,17 +26,17 @@ app.jinja_env.add_extension("chartkick.ext.charts")
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", isIndex=True)
 
 
 @app.route("/aboutass")
 def aboutass():
-    return render_template("about.html")
+    return render_template("about.html", isAbout=True)
 
 
 @app.route("/contact")
 def contact():
-    return render_template("contactme.html")
+    return render_template("contactme.html", isContact=True)
 
 
 @app.route("/crypt/<crypt_type>", methods=["GET", "POST"])
@@ -71,6 +71,7 @@ def crypt(crypt_type):
     return render_template(crypt_type + "_crypt.html",
                            form=form,
                            subtitle=subtitles[crypt_type],
+                           isHomeWork=True,
                            **other_params)
 
 
